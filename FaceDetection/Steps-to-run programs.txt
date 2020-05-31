@@ -1,0 +1,14 @@
+1) place all face pictures in images folder
+2) install python version 3.5.2
+3) install numpy,opencv & pymongo
+4) install tensorflow version 2.0.0 (because it supports all required library)
+5) run facenet.py 
+   wait few minutes for setting weights...
+6) you will see preview screen ,it recognize live face and send result to mongo community client.
+7) Then it is updated to UI 
+
+
+Extra feature i added :
+ 
+after recognition a windows_voice_interface louds a name which it recognize 
+" welcome <name> Have a great day!"

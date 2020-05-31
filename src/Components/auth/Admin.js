@@ -85,14 +85,14 @@ class Admin extends Component {
 					Profiles
 				</h3>
 
-				<div className="mt-4">
+				<div className="mt-3">
 					<BootstrapTable
 						bordered={false}
 						striped
 						hover
 						rowEvents={this.rowEvents}
 						pagination={paginationFactory({
-							sizePerPage: 5
+							sizePerPage: 4
 						})}
 						columns={this.columns}
 						keyField="_id"

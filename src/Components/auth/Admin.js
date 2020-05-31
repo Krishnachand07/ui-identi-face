@@ -81,7 +81,7 @@ class Admin extends Component {
 						</Button>
 					</ModalFooter>
 				</Modal>
-				<h3 className="text-light" style={{ marginTop: '170px' }}>
+				<h3 className="text-light" style={{ marginTop: '150px' }}>
 					Profiles
 				</h3>
 

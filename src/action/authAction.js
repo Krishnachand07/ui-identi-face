@@ -1,9 +1,20 @@
-import { USER_LOADED, AUTH_ERROR, LOGIN_FAIL, LOGIN_SUCCESS, REGISTER_FAIL, REGISTER_SUCCESS } from './types';
+import {
+	USER_LOADED,
+	AUTH_ERROR,
+	LOGIN_FAIL,
+	LOGIN_SUCCESS,
+	REGISTER_FAIL,
+	REGISTER_SUCCESS,
+	USER_LOADING
+} from './types';
 import axios from 'axios';
 import { returnErrors } from './errorAction';
 import { API_URL } from '../config';
 
 export const adminUser = () => (dispatch, getState) => {
+	dispatch({
+		type: USER_LOADING
+	});
 	axios
 		.get(API_URL + '/auth/user', tokenConfig(getState))
 		.then((res) =>
@@ -21,6 +32,9 @@ export const adminUser = () => (dispatch, getState) => {
 };
 
 export const register = ({ email, login, password }) => (dispatch) => {
+	dispatch({
+		type: USER_LOADING
+	});
 	const config = {
 		headers: {
 			'Content-Type': 'application/json'
@@ -45,6 +59,9 @@ export const register = ({ email, login, password }) => (dispatch) => {
 };
 
 export const login = ({ email, password }) => (dispatch) => {
+	dispatch({
+		type: USER_LOADING
+	});
 	const config = {
 		headers: {
 			'Content-Type': 'application/json'

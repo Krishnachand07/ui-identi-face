@@ -3,7 +3,9 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
 import { addProfile } from '../../action/profileAction';
+import { clearError } from '../../action/errorAction';
 import { Alert } from 'reactstrap';
+import { Spinner } from 'react-bootstrap';
 
 class AddProfile extends Component {
 	state = {
@@ -27,8 +29,10 @@ class AddProfile extends Component {
 		console.log(nextProps.profSucc);
 		if (nextProps.profSucc) {
 			this.setState({ alert: true });
+			// this.props.clearError();
 		}
 	}
+
 	render() {
 		return (
 			<div className="container" style={{ marginTop: '120px' }}>
@@ -166,7 +170,12 @@ class AddProfile extends Component {
 										}}
 									/>
 									<button className="btn btn-dark btn-md mt-3" type="submit">
-										Submit
+										Submit{'  '}
+										{this.props.loading ? (
+											<Spinner size="sm" animation="border" variant="light" />
+										) : (
+											''
+										)}
 									</button>
 								</form>
 							</div>
@@ -179,12 +188,13 @@ class AddProfile extends Component {
 }
 
 export const mapStateToProps = (state) => {
-	console.log(state.prof);
+	console.log(state);
 	return {
+		loading: state.prof.isLoading,
 		profSucc: state.prof.profSucc,
 		error: state.error,
 		data: state.prof
 	};
 };
 
-export default connect(mapStateToProps, { addProfile })(AddProfile);
+export default connect(mapStateToProps, { addProfile, clearError })(AddProfile);

@@ -1,9 +1,12 @@
-import { PROFILE_SUCCESS, PROFILE_FAIL, GET_PROFILE, DETAILS } from './types';
+import { PROFILE_SUCCESS, PROFILE_FAIL, GET_PROFILE, DETAILS, PROFILE_LOADING } from './types';
 import axios from 'axios';
 import { returnErrors } from './errorAction';
 import { API_URL } from '../config';
 
 export const getProfile = () => (dispatch) => {
+	dispatch({
+		type: PROFILE_LOADING
+	});
 	axios.get(API_URL + '/auth/profile').then((res) =>
 		dispatch({
 			type: GET_PROFILE,
@@ -13,6 +16,9 @@ export const getProfile = () => (dispatch) => {
 };
 
 export const profileDetails = () => (dispatch) => {
+	dispatch({
+		type: PROFILE_LOADING
+	});
 	axios.get(API_URL + '/auth/details').then((res) =>
 		dispatch({
 			type: DETAILS,
@@ -21,7 +27,10 @@ export const profileDetails = () => (dispatch) => {
 	);
 };
 
-export const addProfile = ({ name, email, phone, gender, address, dob, file }) => (dispatch) => {
+export const addProfile = ({ name, email, phone, gender, address, dob, file }) => (dispatch, getState) => {
+	dispatch({
+		type: PROFILE_LOADING
+	});
 	const config = {
 		headers: {
 			'Content-Type': 'multipart/form-data'

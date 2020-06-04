@@ -6,7 +6,7 @@ import { Modal, Button, ModalFooter, ModalBody, ModalHeader } from 'reactstrap';
 import { getProfile, profileDetails } from '../../action/profileAction';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-import * as ReactBootstrap from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap';
 
 class Admin extends Component {
 	state = {
@@ -84,30 +84,35 @@ class Admin extends Component {
 				<h3 className="text-light" style={{ marginTop: '120px' }}>
 					Profiles
 				</h3>
-
-				<div className="mt-3">
-					<BootstrapTable
-						bordered={false}
-						striped
-						hover
-						rowEvents={this.rowEvents}
-						pagination={paginationFactory({
-							sizePerPage: 4
-						})}
-						columns={this.columns}
-						keyField="_id"
-						data={this.props.profList}
-					/>
-				</div>
+				{this.props.loading ? (
+					<div className="d-flex justify-content-center">
+						<Spinner animation="border" style={{ width: '3em', height: '3em' }} variant="dark" />
+					</div>
+				) : (
+					<div className="mt-3">
+						<BootstrapTable
+							bordered={false}
+							striped
+							hover
+							rowEvents={this.rowEvents}
+							pagination={paginationFactory({
+								sizePerPage: 4
+							})}
+							columns={this.columns}
+							keyField="_id"
+							data={this.props.profList}
+						/>
+					</div>
+				)}
 			</div>
 		);
 	}
 }
 
 export const mapStateToProps = (state) => {
-	console.log(state);
+	console.log(state.prof);
 	return {
-		loading: state.auth.isLoading,
+		loading: state.prof.isLoading,
 		profList: state.prof.profList,
 		detail: state.prof.visitors
 	};

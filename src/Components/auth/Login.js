@@ -5,6 +5,7 @@ import { clearError } from '../../action/errorAction';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Alert } from 'reactstrap';
+import { Spinner } from 'react-bootstrap';
 
 class Login extends Component {
 	state = {
@@ -20,7 +21,9 @@ class Login extends Component {
 			}
 		}
 	}
+
 	componentWillReceiveProps(nextProps) {
+		console.log(nextProps);
 		if (nextProps.isAuthenticated) {
 			window.localStorage.setItem('token', nextProps.data.token);
 			window.location.reload();
@@ -75,7 +78,8 @@ class Login extends Component {
 								)}
 								<br />
 								<button className="btn btn-dark btn-md" type="submit">
-									Login
+									Login{' '}
+									{this.props.loading ? <Spinner animation="border" size="sm" variant="light" /> : ''}
 								</button>
 							</form>
 						</div>
@@ -87,7 +91,9 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => {
+	console.log(state);
 	return {
+		loading: state.auth.isLoading,
 		isAuthenticated: state.auth.isAuthenticated,
 		data: state.auth,
 		error: state.error

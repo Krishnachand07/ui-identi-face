@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Alert } from 'reactstrap';
+import { Spinner } from 'react-bootstrap';
 import { register } from '../../action/authAction';
 import { clearError } from '../../action/errorAction';
 import { Link } from 'react-router-dom';
@@ -89,7 +90,8 @@ class Register extends Component {
 							touched.password && <div className="input-feedback text-light mt-3">{errors.password}</div>}
 							<br />
 							<button className="btn btn-dark btn-md" type="submit">
-								Register
+								Register{'  '}
+								{this.props.loading ? <Spinner size="sm" animation="border" variant="light" /> : ''}
 							</button>
 						</form>
 					)}
@@ -100,7 +102,9 @@ class Register extends Component {
 }
 
 const mapStateToProps = (state) => {
+	console.log(state);
 	return {
+		loading: state.auth.isLoading,
 		isRegistered: state.auth.isRegistered,
 		error: state.error
 	};

@@ -15,11 +15,13 @@ class Admin extends Component {
 	componentDidMount() {
 		store.dispatch(adminUser);
 		this.props.getProfile();
-		this.props.profileDetails();
 	}
 	toggle = () => this.setState({ modal: !this.state.modal });
 	rowEvents = {
-		onClick: () => this.toggle()
+		onClick: () => {
+			this.toggle();
+			this.props.profileDetails();
+		}
 	};
 	col = [ { dataField: 'person', text: 'Visitor' }, { dataField: 'localtime', text: 'Timing and Date' } ];
 	columns = [
@@ -63,17 +65,23 @@ class Admin extends Component {
 				<Modal isOpen={this.state.modal}>
 					<ModalHeader toggle={() => this.toggle()}>Known visitor</ModalHeader>
 					<ModalBody>
-						<BootstrapTable
-							keyField="_id"
-							columns={this.col}
-							data={this.props.detail}
-							pagination={paginationFactory({
-								sizePerPage: 5
-							})}
-							hover
-							striped
-							bordered={false}
-						/>
+						{this.props.detailsLoading ? (
+							<div className="d-flex justify-content-center">
+								<Spinner animation="border" style={{ width: '2em', height: '2em' }} variant="dark" />
+							</div>
+						) : (
+							<BootstrapTable
+								keyField="_id"
+								columns={this.col}
+								data={this.props.detail}
+								pagination={paginationFactory({
+									sizePerPage: 5
+								})}
+								hover
+								striped
+								bordered={false}
+							/>
+						)}
 					</ModalBody>
 					<ModalFooter>
 						<Button color="secondary" onClick={() => this.toggle()}>
@@ -112,6 +120,7 @@ class Admin extends Component {
 export const mapStateToProps = (state) => {
 	console.log(state.prof);
 	return {
+		detailsLoading: state.prof.isDetailLoading,
 		loading: state.prof.isLoading,
 		profList: state.prof.profList,
 		detail: state.prof.visitors

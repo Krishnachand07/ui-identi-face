@@ -1,4 +1,4 @@
-import { PROFILE_SUCCESS, PROFILE_FAIL, GET_PROFILE, DETAILS, PROFILE_LOADING } from './types';
+import { PROFILE_SUCCESS, PROFILE_FAIL, GET_PROFILE, DETAILS, PROFILE_LOADING, DETAILS_LOADING } from './types';
 import axios from 'axios';
 import { returnErrors } from './errorAction';
 import { API_URL } from '../config';
@@ -17,9 +17,9 @@ export const getProfile = () => (dispatch) => {
 
 export const profileDetails = () => (dispatch) => {
 	dispatch({
-		type: PROFILE_LOADING
+		type: DETAILS_LOADING
 	});
-	axios.get(API_URL + '/auth/details').then((res) =>
+	axios.get(API_URL + `/auth/details`).then((res) =>
 		dispatch({
 			type: DETAILS,
 			payload: res.data
@@ -27,7 +27,7 @@ export const profileDetails = () => (dispatch) => {
 	);
 };
 
-export const addProfile = ({ name, email, phone, gender, address, dob, file }) => (dispatch, getState) => {
+export const addProfile = ({ name, email, phone, gender, address, dob, file }) => (dispatch) => {
 	dispatch({
 		type: PROFILE_LOADING
 	});

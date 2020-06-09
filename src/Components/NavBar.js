@@ -1,14 +1,17 @@
 import React, { Component, Fragment } from 'react';
-import { Navbar, Container, NavItem, Nav } from 'reactstrap';
+import { Navbar, Container, NavItem, Nav, Collapse, NavbarToggler } from 'reactstrap';
 import { Logout } from './auth/Logout';
 import { Link } from 'react-router-dom';
 import { BsBoxArrowInLeft, BsPersonPlusFill, BsPersonPlus } from 'react-icons/bs';
 
 class NavBar extends Component {
+	state = {
+		isOpen: false
+	};
 	nav = () => {
 		if (window.localStorage.getItem('token')) {
 			return (
-				<Fragment>
+				<Nav navbar>
 					<NavItem>
 						<Link to="/profile" title="Add Profile" className="nav-link text-light">
 							<BsPersonPlus size="25px" />
@@ -17,11 +20,11 @@ class NavBar extends Component {
 					<NavItem>
 						<Logout />
 					</NavItem>
-				</Fragment>
+				</Nav>
 			);
 		} else {
 			return (
-				<Fragment>
+				<Nav navbar>
 					<NavItem>
 						<Link to="/register" title="Register" className="nav-link text-light">
 							<BsPersonPlusFill size="25px" />
@@ -32,11 +35,14 @@ class NavBar extends Component {
 							<BsBoxArrowInLeft size="25px" />
 						</Link>
 					</NavItem>
-				</Fragment>
+				</Nav>
 			);
 		}
 	};
 
+	toggle = () => {
+		this.setState({ isOpen: !this.state.isOpen });
+	};
 	navBrand = () => {
 		if (window.localStorage.getItem('token')) {
 			return (
@@ -60,11 +66,13 @@ class NavBar extends Component {
 	render() {
 		return (
 			<div>
-				<Navbar color="dark" dark fixed="top" expand="sm">
+				<Navbar color="dark" dark fixed="top" expand="md">
 					<Container>
 						{this.navBrand()}
-
-						<Nav>{this.nav()}</Nav>
+						<NavbarToggler onClick={() => this.toggle()} />
+						<Collapse navbar isOpen={this.state.isOpen}>
+							{this.nav()}
+						</Collapse>
 					</Container>
 				</Navbar>
 			</div>

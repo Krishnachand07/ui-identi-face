@@ -67,7 +67,7 @@ class Admin extends Component {
 					<ModalBody>
 						{this.props.detailsLoading ? (
 							<div className="d-flex justify-content-center">
-								<Spinner animation="border" style={{ width: '2em', height: '2em' }} variant="dark" />
+								<Spinner animation="grow" style={{ width: '2em', height: '2em' }} variant="dark" />
 							</div>
 						) : (
 							<BootstrapTable
@@ -94,7 +94,7 @@ class Admin extends Component {
 				</h3>
 				{this.props.loading ? (
 					<div className="d-flex justify-content-center">
-						<Spinner animation="border" style={{ width: '3em', height: '3em' }} variant="dark" />
+						<Spinner animation="grow" style={{ width: '3em', height: '3em' }} variant="dark" />
 					</div>
 				) : (
 					<div className="mt-3">

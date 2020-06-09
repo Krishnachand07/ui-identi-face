@@ -91,7 +91,7 @@ class Register extends Component {
 							<br />
 							<button className="btn btn-dark btn-md" type="submit">
 								Register{'  '}
-								{this.props.loading ? <Spinner size="sm" animation="border" variant="light" /> : ''}
+								{this.props.loading ? <Spinner size="sm" animation="grow" variant="light" /> : ''}
 							</button>
 						</form>
 					)}

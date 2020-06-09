@@ -172,7 +172,7 @@ class AddProfile extends Component {
 									<button className="btn btn-dark btn-md mt-3" type="submit">
 										Submit{'  '}
 										{this.props.loading ? (
-											<Spinner size="sm" animation="border" variant="light" />
+											<Spinner size="sm" animation="grow" variant="light" />
 										) : (
 											''
 										)}

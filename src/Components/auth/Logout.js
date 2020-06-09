@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { NavLink } from 'reactstrap';
-import { BsBoxArrowInLeft, BsBoxArrowRight } from 'react-icons/bs';
+import { BsBoxArrowRight } from 'react-icons/bs';
 
 export class Logout extends Component {
 	render() {

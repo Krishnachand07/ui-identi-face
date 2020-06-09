@@ -25,7 +25,6 @@ class Login extends Component {
 	componentWillReceiveProps(nextProps) {
 		console.log(nextProps);
 		if (nextProps.isAuthenticated) {
-			window.localStorage.setItem('token', nextProps.data.token);
 			window.location.reload();
 		}
 	}
@@ -79,7 +78,7 @@ class Login extends Component {
 								<br />
 								<button className="btn btn-dark btn-md" type="submit">
 									Login{' '}
-									{this.props.loading ? <Spinner animation="border" size="sm" variant="light" /> : ''}
+									{this.props.loading ? <Spinner animation="grow" size="sm" variant="light" /> : ''}
 								</button>
 							</form>
 						</div>
@@ -95,7 +94,6 @@ const mapStateToProps = (state) => {
 	return {
 		loading: state.auth.isLoading,
 		isAuthenticated: state.auth.isAuthenticated,
-		data: state.auth,
 		error: state.error
 	};
 };

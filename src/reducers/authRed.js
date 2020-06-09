@@ -9,6 +9,7 @@ import {
 } from '../action/types';
 
 const initState = {
+	token: window.localStorage.getItem('token'),
 	isAuthenticated: null,
 	isRegistered: false,
 	isLoading: false,
@@ -30,6 +31,7 @@ export default function(state = initState, action) {
 				user: action.payload
 			};
 		case LOGIN_SUCCESS:
+			window.localStorage.setItem('token', action.payload.token);
 			return {
 				...state,
 				isLoading: false,
@@ -50,9 +52,11 @@ export default function(state = initState, action) {
 				isAuthenticated: false
 			};
 		case LOGIN_FAIL:
+			window.localStorage.removeItem('token');
 			return {
 				...state,
 				isLoading: false,
+				token: null,
 				...action.payload,
 				isAuthenticated: false
 			};
@@ -63,6 +67,7 @@ export default function(state = initState, action) {
 				isLoading: false,
 				isRegistered: false
 			};
+
 		default:
 			return state;
 	}

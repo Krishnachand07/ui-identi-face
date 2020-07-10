@@ -7,6 +7,7 @@ import { getProfile, profileDetails } from '../../action/profileAction';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import { Spinner } from 'react-bootstrap';
+import '../../App.css';
 
 class Admin extends Component {
 	state = {
@@ -97,11 +98,11 @@ class Admin extends Component {
 						<Spinner animation="grow" style={{ width: '3em', height: '3em' }} variant="dark" />
 					</div>
 				) : (
-					<div className="mt-3">
+					<div className="mt-3 table-responsive">
 						<BootstrapTable
 							bordered={false}
 							striped
-							hover
+							hover={true}
 							rowEvents={this.rowEvents}
 							pagination={paginationFactory({
 								sizePerPage: 4
@@ -109,6 +110,7 @@ class Admin extends Component {
 							columns={this.columns}
 							keyField="_id"
 							data={this.props.profList}
+							wrapperClasses="table-responsive"
 						/>
 					</div>
 				)}

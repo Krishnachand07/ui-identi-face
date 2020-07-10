@@ -4,3 +4,6 @@
 .text-light {
 	text-decoration: none;
 }
+.table-responsive {
+	table-layout: auto;
+}

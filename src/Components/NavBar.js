@@ -11,7 +11,7 @@ class NavBar extends Component {
 	nav = () => {
 		if (window.localStorage.getItem('token')) {
 			return (
-				<Nav navbar>
+				<Fragment>
 					<NavItem>
 						<Link to="/profile" title="Add Profile" className="nav-link text-light">
 							<BsPersonPlus size="25px" />
@@ -20,11 +20,11 @@ class NavBar extends Component {
 					<NavItem>
 						<Logout />
 					</NavItem>
-				</Nav>
+				</Fragment>
 			);
 		} else {
 			return (
-				<Nav navbar>
+				<Fragment>
 					<NavItem>
 						<Link to="/register" title="Register" className="nav-link text-light">
 							<BsPersonPlusFill size="25px" />
@@ -35,7 +35,7 @@ class NavBar extends Component {
 							<BsBoxArrowInLeft size="25px" />
 						</Link>
 					</NavItem>
-				</Nav>
+				</Fragment>
 			);
 		}
 	};
@@ -71,7 +71,7 @@ class NavBar extends Component {
 						{this.navBrand()}
 						<NavbarToggler onClick={() => this.toggle()} />
 						<Collapse navbar isOpen={this.state.isOpen}>
-							{this.nav()}
+							<Nav className="ml-auto">{this.nav()}</Nav>
 						</Collapse>
 					</Container>
 				</Navbar>

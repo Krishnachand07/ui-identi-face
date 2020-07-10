@@ -14,7 +14,7 @@ from inception_blocks_v2 import *
 import win32com.client as wincl
 import pymongo
 
-myClient = pymongo.MongoClient('mongodb+srv://user:user@cluster0-fwf06.mongodb.net/test?authSource=admin&replicaSet=Cluster0-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true')
+myClient = pymongo.MongoClient('MONGO_URL')
 myDB = myClient['test']
 myColl = myDB['facedetails']
 
